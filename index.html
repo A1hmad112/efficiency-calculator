@@ -9,103 +9,55 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        .form-group {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
+    <h1>Bottles Line</h1>
+    <div class="form-group">
+        <label for="bottlesFormat">Select format (400, 600, 1500):</label>
+        <input type="number" id="bottlesFormat">
+    </div>
+    <div class="form-group">
+        <label for="operationHours">Enter operation hours:</label>
+        <input type="number" id="operationHours">
+    </div>
+    <div class="form-group">
+        <label for="nbDePacks">Enter nb de packs:</label>
+        <input type="number" id="nbDePacks">
+    </div>
+    <div class="form-group">
+        <label for="dechets">Enter le nb des dechets:</label>
+        <input type="number" id="dechets">
+    </div>
+    <button onclick="calculateEKTAM()">Calculate Efficiency</button>
+    <div id="output">
+    </div>
 
-<script>
-    function calculateEKTAM() {
-        let bottlesformat = parseInt(prompt("Select format (400, 600, 1500):"));
-        let bottlesophrs, nbdepacks, bottlesteamefficiency, bottlesnetefficiency;
-        let dechetsbouteilles, pdechetsbouteilles;
+    <h1>Bidons Line</h1>
 
-        if (![400, 600, 1500].includes(bottlesformat)) {
-            alert("Format not available");
-            return;
-        }
 
-        if (bottlesformat === 400 || bottlesformat === 600) {
-            bottlesophrs = parseFloat(prompt("Enter operation hours:"));
-            nbdepacks = parseInt(prompt("Enter nb de packs:"));
+    <div class="form-group">
+        <label for="formatBidons">Select format (5, 7, 11, 12, 16.5):</label>
+        <input type="number" id="formatBidons">
+    </div>
+    <div class="form-group">
+        <label for="operationHoursBidons">Enter operation hours:</label>
+        <input type="number" id="operationHoursBidons">
+    </div>
+    <div class="form-group">
+        <label for="nbDeBidons">Enter nb de bidons:</label>
+        <input type="number" id="nbDeBidons">
+    </div>
+    <div class="form-group">
+        <label for="dechetsBidons">Enter le nb des dechets:</label>
+        <input type="number" id="dechetsBidons">
+    </div>
+    <button onclick="calculateBidons()">Calculate Bidons Efficiency</button>
+    <div id="outputBidons"></div>
 
-            bottlesteamefficiency = ((nbdepacks * 16) / (12600 * 8)) * 100;
-            alert(`TEAM efficiency EKTAM (8hrs)= ${bottlesteamefficiency.toFixed(2)}`);
-
-            bottlesnetefficiency = ((nbdepacks * 16) / (12600 * bottlesophrs)) * 100;
-            alert(`NET efficiency EKTAM (${bottlesophrs} hrs)= ${bottlesnetefficiency.toFixed(2)}`);
-
-            dechetsbouteilles = parseFloat(prompt("Enter le nb des dechets:"));
-            pdechetsbouteilles = (dechetsbouteilles / (nbdepacks * 16)) * 100;
-            alert(`Pourcentage de dechets= ${pdechetsbouteilles.toFixed(2)}`);
-        } else if (bottlesformat === 1500) {
-            bottlesophrs = parseFloat(prompt("Enter operation hours:"));
-            nbdepacks = parseInt(prompt("Enter nb de packs:"));
-
-            bottlesteamefficiency = ((nbdepacks * 8) / (8000 * 8)) * 100;
-            alert(`TEAM efficiency EKTAM (8hrs)= ${bottlesteamefficiency.toFixed(2)}`);
-
-            bottlesnetefficiency = ((nbdepacks * 8) / (8000 * bottlesophrs)) * 100;
-            alert(`NET efficiency EKTAM (${bottlesophrs} hrs)= ${bottlesnetefficiency.toFixed(2)}`);
-
-            dechetsbouteilles = parseFloat(prompt("Enter le nb des dechets:"));
-            pdechetsbouteilles = (dechetsbouteilles / (nbdepacks * 8)) * 100;
-            alert(`Pourcentage de dechets= ${pdechetsbouteilles.toFixed(2)}`);
-        }
-    }
-
-    function calculateBidons() {
-        let format = parseFloat(prompt("Select format (5, 7, 11, 12, 16.5):"));
-        let prodph, bidon, team_efficiency, net_efficiency;
-        let dechetbidons, pdechetbidons;
-
-        if (![5, 7, 11, 12, 16.5].includes(format)) {
-            alert("Format not available");
-            return;
-        }
-
-        prodph = parseFloat(prompt("Enter operation hours:"));
-        bidon = parseInt(prompt("Enter nb de bidons:"));
-
-        if (format === 5) {
-            team_efficiency = (bidon / (2500 * 8)) * 100;
-            alert(`TEAM efficiency BIDONS (8hrs)= ${team_efficiency.toFixed(2)}%`);
-
-            net_efficiency = (bidon / (2500 * prodph)) * 100;
-            alert(`NET efficiency BIDONS (${prodph} hrs)= ${net_efficiency.toFixed(2)}%`);
-        } else if (format === 7) {
-            team_efficiency = (bidon / (2000 * 8)) * 100;
-            alert(`TEAM efficiency BIDONS (8hrs)= ${team_efficiency.toFixed(2)}%`);
-
-            net_efficiency = (bidon / (2000 * prodph)) * 100;
-            alert(`NET efficiency BIDONS(${prodph} hrs)= ${net_efficiency.toFixed(2)}%`);
-        } else if (format === 11) {
-            team_efficiency = (bidon / (1300 * 8)) * 100;
-            alert(`TEAM efficiency BIDONS (8hrs)= ${team_efficiency.toFixed(2)}%`);
-
-            net_efficiency = (bidon / (1300 * prodph)) * 100;
-            alert(`NET efficiency BIDONS (${prodph} hrs)= ${net_efficiency.toFixed(2)}%`);
-        } else if (format === 12) {
-            team_efficiency = (bidon / (1200 * 8)) * 100;
-            alert(`TEAM efficiency BIDONS (8hrs)= ${team_efficiency.toFixed(2)}%`);
-
-            net_efficiency = (bidon / (1200 * prodph)) * 100;
-            alert(`NET efficiency BIDONS (${prodph} hrs)= ${net_efficiency.toFixed(2)}%`);
-        } else if (format === 16.5) {
-            team_efficiency = (bidon / (800 * 8)) * 100;
-            alert(`TEAM efficiency BIDONS (8hrs)= ${team_efficiency.toFixed(2)}%`);
-
-            net_efficiency = (bidon / (800 * prodph)) * 100;
-            alert(`NET efficiency BIDONS (${prodph} hrs)= ${net_efficiency.toFixed(2)}%`);
-        }
-
-        dechetbidons = parseFloat(prompt("Enter le nb des dechets:"));
-        pdechetbidons = (dechetbidons / bidon) * 100;
-        alert(`Pourcentage de dechets= ${pdechetbidons.toFixed(2)}`);
-    }
-
-    calculateEKTAM();
-    calculateBidons();
-</script>
-
+    <script src="functions.js"></script>
 </body>
 </html>
